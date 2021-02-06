@@ -1,0 +1,7 @@
+"tf2"
+{
+	$string component_name "gm_tf2"
+	$string name "TF2"
+	$string author "Silverlan"
+	$float version 0.1
+}

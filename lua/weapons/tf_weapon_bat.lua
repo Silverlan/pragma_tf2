@@ -1,0 +1,1 @@
+ents.register("tf_weapon_bat",{"tf2_weapon_bat"},Entity.TYPE_SHARED)
