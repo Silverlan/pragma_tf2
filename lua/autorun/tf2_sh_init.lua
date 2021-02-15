@@ -6,6 +6,11 @@ game.Model.Animation.RegisterActivity("ACT_MELEE_VM_DRAW")
 game.Model.Animation.RegisterActivity("ACT_MELEE_VM_HITCENTER")
 game.Model.Animation.RegisterActivity("ACT_MELEE_VM_SWINGHARD")
 
+game.Model.Animation.RegisterActivity("ACT_MP_RUN_MELEE")
+game.Model.Animation.RegisterActivity("ACT_MP_STAND_MELEE")
+game.Model.Animation.RegisterActivity("ACT_MP_CROUCH_MELEE")
+game.Model.Animation.RegisterActivity("ACT_MP_CROUCHWALK_MELEE")
+
 -- Weapon_BaseballBat.HitWorld
 
 tf2.PLAYER_CLASS_INVALID = -1

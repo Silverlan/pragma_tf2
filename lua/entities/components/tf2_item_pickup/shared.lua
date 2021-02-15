@@ -31,7 +31,16 @@ end
 function Component:OnEntitySpawn()
 	if((SERVER or self:GetEntity():IsClientsideOnly()) and self.m_itemModel ~= nil) then
 		self:GetEntity():SetModel(self.m_itemModel)
+
+		local ent = self:GetEntity()
+		local touchComponent = ent:GetComponent(ents.COMPONENT_TOUCH)
+		if(touchComponent ~= nil) then
+			touchComponent:SetTriggerFlags(ents.TouchComponent.TRIGGER_FLAG_BIT_PLAYERS)
+		end
+		local physComponent = ent:GetPhysicsComponent()
+		if(physComponent ~= nil) then physComponent:InitializePhysics(phys.TYPE_STATIC) end
 	end
 	if(CLIENT) then self:ResetAnimation() end
 end
 ents.tf2.COMPONENT_ITEM_PICKUP = ents.register_component("tf2_item_pickup",Component)
+Component.EVENT_ON_PICKED_UP = ents.register_component_event(ents.tf2.COMPONENT_ITEM_PICKUP,"on_picked_up")

@@ -86,9 +86,7 @@ function Component:OnEntitySpawn()
 	if(touchComponent ~= nil) then
 		touchComponent:SetTriggerFlags(ents.TouchComponent.TRIGGER_FLAG_BIT_PLAYERS)
 	end
-	if(SERVER == true) then
-		local physComponent = ent:GetPhysicsComponent()
-		if(physComponent ~= nil) then physComponent:InitializePhysics(phys.TYPE_STATIC) end
-	end
+	local physComponent = ent:GetPhysicsComponent()
+	if(physComponent ~= nil) then physComponent:InitializePhysics(phys.TYPE_STATIC) end
 end
 ents.tf2.COMPONENT_REGENERATE = ents.register_component("tf2_regenerate",Component)

@@ -12,3 +12,8 @@ function Component:FindSpawnPoint()
 	local trComponent = ent:GetTransformComponent()
 	return trComponent:GetPos(),EulerAngles(0,trComponent:GetYaw(),0)
 end
+
+function Component:OnPlayerSpawned(pl)
+	local tfPlC = pl:GetEntity():AddNetworkedComponent("tf2_player")
+	if(tfPlC ~= nil) then tfPlC:ChangeClass(tf2.PLAYER_CLASS_SCOUT) end
+end

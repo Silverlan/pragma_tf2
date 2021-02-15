@@ -10,7 +10,7 @@ include("sh_reload.lua")
 Component.ViewModel = "weapons/c_models/c_scout_arms"
 Component.WorldModel = "weapons/w_models/w_bat"
 Component.ViewFOV = 50
-Component.AttackDelay = 0.3
+Component.AttackDelay = 0.6
 
 function Component:__init()
 	BaseEntityComponent.__init(self)
@@ -48,6 +48,13 @@ function Component:OnPrimaryAttack()
 		end
 		wepC:PlayViewActivity(Animation.ACT_MELEE_VM_HITCENTER,ents.AnimatedComponent.FPLAYANIM_RESET)
 	end
+
+	local owner = ent:GetOwner()
+	local animC = (owner ~= nil) and owner:GetComponent(ents.COMPONENT_ANIMATED) or nil
+	if(animC ~= nil) then
+		animC:PlayLayeredAnimation(0,"layer_melee_swing")
+	end
+
 	wepC:SetNextAttack(time.cur_time() +self.AttackDelay)
 end
 

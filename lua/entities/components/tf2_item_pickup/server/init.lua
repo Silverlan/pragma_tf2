@@ -1,23 +1,12 @@
 include("../shared.lua")
 local Component = ents.tf2.ItemPickup
 
---[[function Component:OnEntitySpawn()
-	local ent = self:GetEntity()
-	local touchComponent = ent:GetComponent(ents.COMPONENT_TOUCH)
-	if(touchComponent ~= nil) then
-		touchComponent:SetTriggerFlags(ents.TouchComponent.TRIGGER_FLAG_BIT_PLAYERS)
-	end
-	if(SERVER == true) then
-		local physComponent = ent:GetPhysicsComponent()
-		if(physComponent ~= nil) then physComponent:InitializePhysics(phys.TYPE_STATIC) end
-	end]
-end
-]]
 function Component:CanTrigger(ent,physObj)
 	return util.EVENT_REPLY_HANDLED,ent:IsPlayer()
 end
 
-function Component:OnStartTouch()
+function Component:OnStartTouch(ent)
+	self:BroadcastEvent(Component.EVENT_ON_PICKED_UP,{ent})
 	--[[if(self.m_state ~= STATE_READY_FOR_USE) then return end
 	local ent = self:FindAssociatedModelEntity()
 	if(ent == nil) then return end
