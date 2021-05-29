@@ -30,6 +30,7 @@ function Component:Initialize()
 	self.m_class = tf2.PLAYER_CLASS_INVALID
 
 	self:BindEvent(ents.AnimatedComponent.EVENT_TRANSLATE_ACTIVITY,"TranslateActivity")
+	self:BindEvent(ents.CharacterComponent.EVENT_ON_RESPAWN,"OnRespawn")
 end
 
 function Component:UpdateMovementSpeed()
@@ -74,8 +75,7 @@ function Component:InitializePlayer(plC)
 	if(charComponent ~= nil) then charComponent:SetMoveController("move_x","move_y") end
 	self:BroadcastEvent(Component.EVENT_APPLY_CHARACTER_MODEL,{plC})
 
-	local plC = ent:GetComponent(ents.COMPONENT_PLAYER)
-	if(plC ~= nil) then plC:SetObserverMode(ents.PlayerComponent.OBSERVERMODE_THIRDPERSON) end
+	self:UpdatePhysics()
 end
 
 function Component:ChangeClass(class)
@@ -102,6 +102,17 @@ function Component:ChangeClass(class)
 	end
 end
 
+function Component:UpdatePhysics()
+	local ent = self:GetEntity()
+	local pl = ent:GetComponent(ents.COMPONENT_PLAYER)
+	if(pl == nil) then return end
+	local physComponent = ent:GetComponent(ents.COMPONENT_PHYSICS)
+	if(physComponent ~= nil) then
+		physComponent:SetCollisionBounds(Vector(-16,0,-16),Vector(16,pl:GetStandHeight(),16))
+		physComponent:InitializePhysics(phys.TYPE_CAPSULECONTROLLER)
+	end
+end
+
 function Component:ClearClass()
 	if(self.m_class ~= tf2.PLAYER_CLASS_INVALID) then self:GetEntity():RemoveComponent(tf2.player_class_to_identifier(self.m_class)) end
 	if(CLIENT) then self:ResetViewModel() end
@@ -109,32 +120,29 @@ end
 
 function Component:GetClass() return self.m_class end
 
-function Component:OnPlayerSpawned(pl)
-	local ent = pl:GetEntity()
+function Component:OnEntitySpawn()
+	if(CLIENT) then
+		local renderC = self:GetEntity():GetComponent(ents.COMPONENT_RENDER)
+		-- Fixes a bug that causes the player to become partially invisible depending on the camera angle.
+		-- TODO: This is a workaround, fix the underlying cause!
+		if(renderC ~= nil) then renderC:SetExemptFromOcclusionCulling(true) end
+	end
+	self:OnRespawn()
+end
+
+function Component:OnRespawn()
+	local ent = self:GetEntity()
+	local pl = ent:GetComponent(ents.COMPONENT_PLAYER)
+	if(pl == nil) then return end
 	local healthComponent = ent:GetComponent(ents.COMPONENT_HEALTH)
 	if(healthComponent ~= nil) then healthComponent:SetMaxHealth(100) end
 	
-	local physComponent = ent:GetComponent(ents.COMPONENT_PHYSICS)
-	if(physComponent ~= nil) then
-		physComponent:SetCollisionBounds(Vector(-16,0,-16),Vector(16,pl:GetStandHeight(),16))
-		physComponent:InitializePhysics(phys.TYPE_CAPSULECONTROLLER)
-	end
-	
 	if(SERVER == true) then
 		if(healthComponent ~= nil) then healthComponent:SetHealth(100) end
-		
-		local pos,ang = self:FindSpawnPoint()
-		local trComponent = ent:GetTransformComponent()
-		if(trComponent ~= nil) then
-			trComponent:SetPos(pos)
-			trComponent:SetAngles(ang)
-		end
-		
-		local charComponent = ent:GetCharacterComponent()
-		if(charComponent ~= nil) then
-			charComponent:SetViewAngles(ang)
-		end
 	end
+
+	self:UpdatePhysics()
+	if(pl ~= nil) then pl:SetObserverMode(ents.PlayerComponent.OBSERVERMODE_THIRDPERSON) end
 end
 ents.tf2.COMPONENT_PLAYER = ents.register_component("tf2_player",Component,ents.EntityComponent.FREGISTER_BIT_NETWORKED)
 Component.NET_EVENT_CHANGE_CLASS = ents.register_component_net_event(ents.tf2.COMPONENT_PLAYER,"change_class")

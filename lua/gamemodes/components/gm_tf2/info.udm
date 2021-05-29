@@ -5,4 +5,8 @@
 	$string author "Silverlan"
 	$float version 0.1
 	$string initial_map "ctf_turbine"
+	"mount_priorities"
+	{
+		$int32 "tf2" 10000
+	}
 }

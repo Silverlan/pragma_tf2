@@ -1,2 +1,2 @@
 # pragma_tf2
-TF2 re-creation for Pragma
+Implementation of various TF2 entities for Pragma

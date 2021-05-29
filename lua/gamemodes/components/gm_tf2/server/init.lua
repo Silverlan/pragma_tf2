@@ -15,4 +15,17 @@ end
 function Component:OnPlayerSpawned(pl)
 	local tfPlC = pl:GetEntity():AddNetworkedComponent("tf2_player")
 	if(tfPlC ~= nil) then tfPlC:ChangeClass(tf2.PLAYER_CLASS_SCOUT) end
+
+	local ent = pl:GetEntity()
+	local pos,ang = self:FindSpawnPoint()
+	local trComponent = ent:GetTransformComponent()
+	if(trComponent ~= nil) then
+		trComponent:SetPos(pos)
+		trComponent:SetAngles(ang)
+	end
+	
+	local charComponent = ent:GetCharacterComponent()
+	if(charComponent ~= nil) then
+		charComponent:SetViewAngles(ang)
+	end
 end
