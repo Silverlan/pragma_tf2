@@ -1,3 +1,4 @@
+include_component("gm_generic")
 include_component("tf2_player")
 
 util.register_class("ents.GmTf2",BaseEntityComponent)

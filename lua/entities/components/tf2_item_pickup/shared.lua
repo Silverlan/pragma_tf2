@@ -20,13 +20,9 @@ function Component:Initialize()
 		self:BindEvent(ents.TouchComponent.EVENT_ON_START_TOUCH,"OnStartTouch")
 		self:BindEvent(ents.TouchComponent.EVENT_CAN_TRIGGER,"CanTrigger")
 	end
-	self:SetTickPolicy(ents.TICK_POLICY_ALWAYS)
 end
 function Component:SetModel(mdl)
 	self.m_itemModel = mdl
-end
-function Component:OnTick()
-
 end
 function Component:OnEntitySpawn()
 	if((SERVER or self:GetEntity():IsClientsideOnly()) and self.m_itemModel ~= nil) then

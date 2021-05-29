@@ -13,4 +13,4 @@ function Component:Initialize()
 		if(healthkitC ~= nil) then healthkitC:SetRestoreAmount(1.0) end
 	end
 end
-ents.tf2.COMPONENT_HEALTHKIT_MEDIUM = ents.register_component("tf2_healthkit_full",Component)
+ents.tf2.COMPONENT_HEALTHKIT_FULL = ents.register_component("tf2_healthkit_full",Component)

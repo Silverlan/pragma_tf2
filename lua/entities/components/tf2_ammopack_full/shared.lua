@@ -13,4 +13,4 @@ function Component:Initialize()
 		if(ammoPackC ~= nil) then ammoPackC:SetRestoreAmount(1.0) end
 	end
 end
-ents.tf2.COMPONENT_AMMO_PACK_MEDIUM = ents.register_component("tf2_ammopack_full",Component)
+ents.tf2.COMPONENT_AMMO_PACK_FULL = ents.register_component("tf2_ammopack_full",Component)
