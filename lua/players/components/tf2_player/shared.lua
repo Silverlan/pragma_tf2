@@ -142,7 +142,10 @@ function Component:OnRespawn()
 	end
 
 	self:UpdatePhysics()
-	if(pl ~= nil) then pl:SetObserverMode(ents.PlayerComponent.OBSERVERMODE_THIRDPERSON) end
+	if(pl ~= nil) then
+		pl:SetObserverMode(ents.PlayerComponent.OBSERVERMODE_THIRDPERSON)
+		pl:SetFlashlightEnabled(true)
+	end
 end
 ents.tf2.COMPONENT_PLAYER = ents.register_component("tf2_player",Component,ents.EntityComponent.FREGISTER_BIT_NETWORKED)
 Component.NET_EVENT_CHANGE_CLASS = ents.register_component_net_event(ents.tf2.COMPONENT_PLAYER,"change_class")

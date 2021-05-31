@@ -1,8 +1,20 @@
 include("../shared.lua")
+include_component("tf2_player_teamspawn")
 local Component = ents.GmTf2
 
 function Component:FindSpawnPoint()
-	local tEnts = ents.get_all({ents.IteratorFilterComponent(ents.COMPONENT_PLAYER_SPAWN),ents.IteratorFilterComponent(ents.COMPONENT_TRANSFORM)})
+	local tEnts = ents.get_all({ents.IteratorFilterComponent(ents.tf2.COMPONENT_PLAYER_TEAM_SPAWN),ents.IteratorFilterComponent(ents.COMPONENT_TRANSFORM)})
+	local i = 1
+	while(i <= #tEnts) do
+		local ent = tEnts[i]
+		local c = ent:GetComponent(ents.tf2.COMPONENT_PLAYER_TEAM_SPAWN)
+		if(c:GetMatchSummary() ~= 0) then table.remove(tEnts,i)
+		else i = i +1 end
+	end
+	if(#tEnts == 0) then
+		-- Fallback
+		tEnts = ents.get_all({ents.IteratorFilterComponent(ents.COMPONENT_PLAYER_SPAWN),ents.IteratorFilterComponent(ents.COMPONENT_TRANSFORM)})
+	end
 	local numSpawnPoints = #tEnts
 	if(numSpawnPoints == 0) then return Vector(0,0,0),EulerAngles(0,0,0) end
 	local r = math.random(1,numSpawnPoints)
