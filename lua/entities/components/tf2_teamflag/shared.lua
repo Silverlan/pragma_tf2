@@ -10,9 +10,9 @@ Component.GAME_TYPE_ROBOT_DESTRUCTION = 5
 
 local noIoFlags = bit.bnot(bit.bor(ents.BaseEntityComponent.MEMBER_FLAG_BIT_INPUT,ents.BaseEntityComponent.MEMBER_FLAG_BIT_OUTPUT))
 if(SERVER) then
-	Component:RegisterMember("ReturnTime",util.VAR_TYPE_FLOAT,60.0,bit.band(ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT,noIoFlags),1)
+	Component:RegisterMember("ReturnTime",ents.MEMBER_TYPE_FLOAT,60.0,{},bit.band(ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT,noIoFlags))
 end
-Component:RegisterMember("GameType",util.VAR_TYPE_UINT32,Component.GAME_TYPE_CTF,bit.band(ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_NETWORKED,noIoFlags),1)
+Component:RegisterMember("GameType",ents.MEMBER_TYPE_UINT32,Component.GAME_TYPE_CTF,{},bit.band(ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_NETWORKED,noIoFlags))
 
 local gmComponents = {
 	[Component.GAME_TYPE_CTF] = "gm_tf2_ctf",

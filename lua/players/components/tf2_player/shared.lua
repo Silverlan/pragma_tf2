@@ -1,10 +1,10 @@
 util.register_class("ents.tf2.Player",BaseEntityComponent)
 local Component = ents.tf2.Player
 
-Component:RegisterMember("DefaultForwardMovementSpeedFactor",util.VAR_TYPE_FLOAT,1.0,ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT,1)
-Component:RegisterMember("DefaultBackwardMovementSpeedFactor",util.VAR_TYPE_FLOAT,0.9,ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT,1)
-Component:RegisterMember("DefaultCrouchedMovementSpeedFactor",util.VAR_TYPE_FLOAT,0.33,ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT,1)
-Component:RegisterMember("DefaultJumpHeight",util.VAR_TYPE_FLOAT,72.0,ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT,1)
+Component:RegisterMember("DefaultForwardMovementSpeedFactor",ents.MEMBER_TYPE_FLOAT,1.0,{},ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT)
+Component:RegisterMember("DefaultBackwardMovementSpeedFactor",ents.MEMBER_TYPE_FLOAT,0.9,{},ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT)
+Component:RegisterMember("DefaultCrouchedMovementSpeedFactor",ents.MEMBER_TYPE_FLOAT,0.33,{},ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT)
+Component:RegisterMember("DefaultJumpHeight",ents.MEMBER_TYPE_FLOAT,72.0,{},ents.BaseEntityComponent.MEMBER_FLAG_DEFAULT_TRANSMIT)
 
 local TF2_ACTIVITIES = {
 	[game.Model.Animation.ACT_WALK] = game.Model.Animation.ACT_MP_RUN_MELEE,
@@ -68,7 +68,10 @@ function Component:InitializePlayer(plC)
 			local sndComponent = charComponent:GetEntity():GetComponent(ents.COMPONENT_SOUND_EMITTER)
 			if(sndComponent == nil) then return end
 			local maxGain = 0.5
-			sndComponent:EmitSound(surfMat:GetFootstepSound(),bit.bor(sound.TYPE_EFFECT,sound.TYPE_PLAYER),maxGain *intensity,1.0,false)
+			
+			local sndInfo = ents.SoundEmitterComponent.SoundInfo(maxGain *intensity,1.0)
+			sndInfo.transmit = false
+			sndComponent:EmitSound(surfMat:GetFootstepSound(),bit.bor(sound.TYPE_EFFECT,sound.TYPE_PLAYER),sndInfo)
 		end)
 	end
 	self:InitializeDefaultPlayerDimensions(plC)
@@ -87,6 +90,8 @@ function Component:ChangeClass(class)
 	if(SERVER) then
 		local p = net.Packet()
 		p:WriteUInt32(class)
+		_self = self
+		print("SELF: ",util.get_type_name(self))
 		self:SendNetEvent(net.PROTOCOL_SLOW_RELIABLE,Component.NET_EVENT_CHANGE_CLASS,p)
 	end
 

@@ -44,7 +44,7 @@ function Component:OnPrimaryAttack()
 	if(CLIENT == true) then
 		local sndEmitterComponent = ent:GetComponent(ents.COMPONENT_SOUND_EMITTER)
 		if(sndEmitterComponent ~= nil) then
-			sndEmitterComponent:EmitSound("weapons/bat_baseball_hit_world1.wav",sound.TYPE_WEAPON,1.0,1.0) -- TODO: Use sound script
+			sndEmitterComponent:EmitSound("weapons/bat_baseball_hit_world1.wav",sound.TYPE_WEAPON,ents.SoundEmitterComponent.SoundInfo(1.0,1.0)) -- TODO: Use sound script
 		end
 		wepC:PlayViewActivity(Animation.ACT_MELEE_VM_HITCENTER,ents.AnimatedComponent.FPLAYANIM_RESET)
 	end
