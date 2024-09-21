@@ -1,4 +1,4 @@
-util.register_class("ents.tf2.Announcer",BaseEntityComponent)
+util.register_class("ents.tf2.Announcer", BaseEntityComponent)
 local Component = ents.tf2.Announcer
 
 function Component:__init()
@@ -10,4 +10,4 @@ end
 function Component:PlayVoice(snd)
 	--sound.play("vo/intel_teamstolen.mp3",sound.TYPE_VOICE)
 end
-ents.tf2.COMPONENT_ANNOUNCER = ents.register_component("tf2_announcer",Component)
+ents.register_component("tf2_announcer", Component, "tf2")

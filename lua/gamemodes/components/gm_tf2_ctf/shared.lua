@@ -1,4 +1,4 @@
-util.register_class("ents.tf2.GmCtf",BaseEntityComponent)
+util.register_class("ents.tf2.GmCtf", BaseEntityComponent)
 local Component = ents.tf2.GmCtf
 
 function Component:__init()
@@ -10,4 +10,4 @@ function Component:Initialize()
 
 	self:AddEntityComponent("gm_tf2")
 end
-ents.tf2.COMPONENT_GM_CTF = ents.register_component("gm_tf2_ctf",Component)
+ents.register_component("gm_tf2_ctf", Component, "tf2")

@@ -101,4 +101,4 @@ function Component:InitializeWeapon(component)
 		component:SetSecondaryAmmoType(self.Secondary.AmmoType)
 	end
 end
-ents.tf2.COMPONENT_TF2_WEAPON_BAT = ents.register_component("tf2_weapon_bat", Component)
+ents.register_component("tf2_weapon_bat", Component, "tf2")

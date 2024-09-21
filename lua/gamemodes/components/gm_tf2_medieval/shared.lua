@@ -1,4 +1,4 @@
-util.register_class("ents.tf2.GmMedieval",BaseEntityComponent)
+util.register_class("ents.tf2.GmMedieval", BaseEntityComponent)
 local Component = ents.tf2.GmMedieval
 
 function Component:__init()
@@ -10,4 +10,4 @@ function Component:Initialize()
 
 	self:AddEntityComponent("gm_tf2")
 end
-ents.tf2.COMPONENT_GM_MEDIEVAL = ents.register_component("gm_tf2_medieval",Component)
+ents.register_component("gm_tf2_medieval", Component, "tf2")

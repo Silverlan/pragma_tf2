@@ -1,7 +1,7 @@
 include_component("gm_generic")
 include_component("tf2_player")
 
-util.register_class("ents.GmTf2",BaseEntityComponent)
+util.register_class("ents.GmTf2", BaseEntityComponent)
 local Component = ents.GmTf2
 
 function Component:__init()
@@ -11,13 +11,13 @@ end
 function Component:Initialize()
 	BaseEntityComponent.Initialize(self)
 
-	self:BindEvent(ents.GamemodeComponent.EVENT_ON_PLAYER_SPAWNED,"OnPlayerSpawned")
+	self:BindEvent(ents.GamemodeComponent.EVENT_ON_PLAYER_SPAWNED, "OnPlayerSpawned")
 
-	if(CLIENT) then
-		console.run("cl_fov_viewmodel","54")
+	if CLIENT then
+		console.run("cl_fov_viewmodel", "54")
 	else
-		for ent in ents.iterator({ents.IteratorFilterComponent(ents.COMPONENT_PLAYER)}) do
-			if(ent:IsSpawned()) then
+		for ent in ents.iterator({ ents.IteratorFilterComponent(ents.COMPONENT_PLAYER) }) do
+			if ent:IsSpawned() then
 				self:OnPlayerSpawned(ent:GetComponent(ents.COMPONENT_PLAYER))
 			end
 		end
@@ -27,16 +27,18 @@ function Component:Initialize()
 end
 
 function Component:InitializeConsoleCommands()
-	if(SERVER) then
+	if SERVER then
 		net.register("sv_tf2_dropitem")
-		net.receive("sv_tf2_dropitem",function(packet,pl)
+		net.receive("sv_tf2_dropitem", function(packet, pl)
 			local plC = pl:GetEntity():GetComponent("tf2_player")
-			if(plC ~= nil) then plC:DropItem() end
+			if plC ~= nil then
+				plC:DropItem()
+			end
 		end)
 	else
-		console.register_command("dropitem",function(pl,...)
-			net.send(net.PROTOCOL_SLOW_RELIABLE,"sv_tf2_dropitem",net.Packet())
+		console.register_command("dropitem", function(pl, ...)
+			net.send(net.PROTOCOL_SLOW_RELIABLE, "sv_tf2_dropitem", net.Packet())
 		end)
 	end
 end
-ents.COMPONENT_GM_TF2 = ents.register_component("gm_tf2",Component)
+ents.register_component("gm_tf2", Component, "tf2")

@@ -1,4 +1,4 @@
-util.register_class("ents.tf2.CarryItem",BaseEntityComponent)
+util.register_class("ents.tf2.CarryItem", BaseEntityComponent)
 local Component = ents.tf2.CarryItem
 
 function Component:__init()
@@ -7,4 +7,4 @@ end
 function Component:Initialize()
 	BaseEntityComponent.Initialize(self)
 end
-ents.tf2.COMPONENT_CARRY_ITEM = ents.register_component("tf2_carry_item",Component)
+ents.register_component("tf2_carry_item", Component, "tf2")
