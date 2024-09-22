@@ -7,4 +7,4 @@ end
 function Component:Initialize()
 	BaseEntityComponent.Initialize(self)
 end
-ents.register_component("tf2_carry_item", Component, "tf2")
+ents.tf2.COMPONENT_CARRY_ITEM = ents.register_component("tf2_carry_item", Component, "tf2")

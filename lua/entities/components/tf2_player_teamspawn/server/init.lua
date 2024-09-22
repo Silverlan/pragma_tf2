@@ -22,4 +22,4 @@ function Component:HandleKeyValue(key, val)
 	end
 	return util.EVENT_REPLY_HANDLED
 end
-ents.register_component("tf2_player_teamspawn", Component, "tf2")
+ents.tf2.COMPONENT_PLAYER_TEAMSPAWN = ents.register_component("tf2_player_teamspawn", Component, "tf2")

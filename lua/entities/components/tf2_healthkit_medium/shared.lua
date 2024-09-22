@@ -17,4 +17,4 @@ function Component:Initialize()
 		end
 	end
 end
-ents.register_component("tf2_healthkit_medium", Component, "tf2")
+ents.tf2.COMPONENT_HEALTHKIT_MEDIUM = ents.register_component("tf2_healthkit_medium", Component, "tf2/items/healthkit")

@@ -13,4 +13,4 @@ end
 function Component:SetRestoreAmount(am)
 	self.m_restoreAmount = am
 end
-ents.register_component("tf2_healthkit", Component, "tf2")
+ents.tf2.COMPONENT_HEALTHKIT = ents.register_component("tf2_healthkit", Component, "tf2/items/healthkit")

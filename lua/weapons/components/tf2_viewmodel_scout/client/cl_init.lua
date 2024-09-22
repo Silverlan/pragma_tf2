@@ -14,4 +14,4 @@ end
 function Component:OnEntitySpawn()
 	self:GetEntity():SetModel("weapons/c_models/c_scout_arms")
 end
-ents.register_component("tf2_viewmodel_scout", Component, "tf2")
+ents.tf2.COMPONENT_VIEWMODEL_SCOUT = ents.register_component("tf2_viewmodel_scout", Component, "tf2")

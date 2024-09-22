@@ -13,4 +13,4 @@ end
 function Component:SetRestoreAmount(am)
 	self.m_restoreAmount = am
 end
-ents.register_component("tf2_ammopack", Component, "tf2")
+ents.tf2.COMPONENT_AMMOPACK = ents.register_component("tf2_ammopack", Component, "tf2")

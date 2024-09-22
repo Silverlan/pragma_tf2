@@ -17,4 +17,4 @@ function Component:Initialize()
 		end
 	end
 end
-ents.register_component("tf2_ammopack_full", Component, "tf2")
+ents.tf2.COMPONENT_AMMOPACK_FULL = ents.register_component("tf2_ammopack_full", Component, "tf2/ammo")

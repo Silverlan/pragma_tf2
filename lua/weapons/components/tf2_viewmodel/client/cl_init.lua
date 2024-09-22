@@ -23,4 +23,4 @@ function Component:TranslateActivity(act)
 	end
 	return util.EVENT_REPLY_HANDLED, VM_ACTIVITY_TO_TF2[act]
 end
-ents.register_component("tf2_viewmodel", Component, "tf2")
+ents.tf2.COMPONENT_VIEWMODEL = ents.register_component("tf2_viewmodel", Component, "tf2")

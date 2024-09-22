@@ -10,4 +10,4 @@ end
 function Component:PlayVoice(snd)
 	--sound.play("vo/intel_teamstolen.mp3",sound.TYPE_VOICE)
 end
-ents.register_component("tf2_announcer", Component, "tf2")
+ents.tf2.COMPONENT_ANNOUNCER = ents.register_component("tf2_announcer", Component, "tf2")

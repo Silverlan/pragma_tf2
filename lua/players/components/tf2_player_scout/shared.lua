@@ -48,4 +48,4 @@ function Component:ApplyModel()
 		mdlComponent:SetModel("player/scout")
 	end
 end
-ents.register_component("tf2_player_scout", Component, "tf2")
+ents.tf2.COMPONENT_PLAYER_SCOUT = ents.register_component("tf2_player_scout", Component, "tf2")

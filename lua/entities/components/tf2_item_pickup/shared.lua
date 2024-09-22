@@ -44,5 +44,5 @@ function Component:OnEntitySpawn()
 		self:ResetAnimation()
 	end
 end
-ents.register_component("tf2_item_pickup", Component, "tf2")
+ents.tf2.COMPONENT_ITEM_PICKUP = ents.register_component("tf2_item_pickup", Component, "tf2")
 Component.EVENT_ON_PICKED_UP = ents.register_component_event(ents.tf2.COMPONENT_ITEM_PICKUP, "on_picked_up")

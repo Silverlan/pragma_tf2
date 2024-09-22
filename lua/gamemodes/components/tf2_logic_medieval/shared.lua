@@ -7,4 +7,4 @@ end
 function Component:Initialize()
 	BaseEntityComponent.Initialize(self)
 end
-ents.register_component("tf2_logic_medieval", Component, "tf2")
+ents.tf2.COMPONENT_LOGIC_MEDIEVAL = ents.register_component("tf2_logic_medieval", Component, "tf2")

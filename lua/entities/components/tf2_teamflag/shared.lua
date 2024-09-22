@@ -104,4 +104,4 @@ function Component:OnEntitySpawn()
 		end
 	end
 end
-ents.register_component("tf2_teamflag", Component, "tf2")
+ents.tf2.COMPONENT_TEAMFLAG = ents.register_component("tf2_teamflag", Component, "tf2")

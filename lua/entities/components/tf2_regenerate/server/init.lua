@@ -103,4 +103,4 @@ function Component:OnEntitySpawn()
 		physComponent:InitializePhysics(phys.TYPE_STATIC)
 	end
 end
-ents.register_component("tf2_regenerate", Component, "tf2")
+ents.tf2.COMPONENT_REGENERATE = ents.register_component("tf2_regenerate", Component, "tf2")
