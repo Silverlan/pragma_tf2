@@ -1,3 +1,6 @@
+-- SPDX-FileCopyrightText: (c) 2021 Silverlan <opensource@pragma-engine.com>
+-- SPDX-License-Identifier: MIT
+
 local Component = ents.tf2.WeaponBat
 Component.Secondary = {}
 Component.Secondary.AmmoType = "smg1_grenade"

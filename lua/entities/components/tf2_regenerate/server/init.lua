@@ -1,3 +1,6 @@
+-- SPDX-FileCopyrightText: (c) 2021 Silverlan <opensource@pragma-engine.com>
+-- SPDX-License-Identifier: MIT
+
 util.register_class("ents.tf2.Regenerate", BaseEntityComponent)
 local Component = ents.tf2.Regenerate
 local NEXT_USE_TIME = 3.0
